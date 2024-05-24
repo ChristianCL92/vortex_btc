@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+.form-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Avstånd mellan elementen */
+}
+
+.form-container input {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.form-container button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}

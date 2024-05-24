@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../App.css';
 
 const AddTransaction = ({ onAddTransaction }) => {
   const [amount, setAmount] = useState('');
@@ -17,34 +18,28 @@ const AddTransaction = ({ onAddTransaction }) => {
   return (
     <div>
       <h2>Add Transaction</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Amount</label>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Sender</label>
-          <input
-            type="text"
-            value={sender}
-            onChange={(e) => setSender(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Recipient</label>
-          <input
-            type="text"
-            value={recipient}
-            onChange={(e) => setRecipient(e.target.value)}
-            required
-          />
-        </div>
+      <form
+        onSubmit={handleSubmit}
+        className="form-container"
+      >
+        <input
+          type="text"
+          placeholder="Sender"
+          value={sender}
+          onChange={(e) => setSender(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Recipient"
+          value={recipient}
+          onChange={(e) => setRecipient(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
         <button type="submit">Add Transaction</button>
       </form>
     </div>

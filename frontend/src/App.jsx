@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Blockchain from './components/Blockchain';
+// import Blockchain from './components/Blockchain';
 import AddTransaction from './components/AddTransaction';
 import './App.css';
 
@@ -41,9 +41,9 @@ function App() {
   return (
     <div>
       <h1>Blockchain Explorer</h1>
-      {/* <Blockchain blockchain={blockchain} /> */}
       <AddTransaction onAddTransaction={handleAddTransaction} />
       {message && <p>{message}</p>}
+      {/* <Blockchain blockchain={blockchain} /> */}
     </div>
   );
 }
