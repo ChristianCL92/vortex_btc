@@ -5,10 +5,19 @@ const AddTransaction = ({ onAddTransaction }) => {
   const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const transaction = { amount, sender, recipient };
+    onAddTransaction(transaction);
+    setAmount('');
+    setSender('');
+    setRecipient('');
+  };
+
   return (
     <div>
       <h2>Add Transaction</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Amount</label>
           <input
