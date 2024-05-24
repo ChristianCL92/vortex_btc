@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const AddTransaction = ({ onAddTransaction }) => {
   const [amount, setAmount] = useState('');
