@@ -1,6 +1,9 @@
 import express from "express";
+import blockchainRouter from "./routes/blockchain-routes.mjs"
 
 const app = express();
+
+app.use("/api/v1/blockchain", blockchainRouter)
 
 const PORT = 4001;
 
