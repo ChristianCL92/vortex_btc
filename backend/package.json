@@ -5,7 +5,8 @@
   "main": "server.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.mjs"
+    "dev": "nodemon server.mjs",
+    "dev-node": "cross-env CREATING_DYNAMIC_PORT='true' nodemon server.mjs"
   },
   "author": "",
   "license": "ISC",
