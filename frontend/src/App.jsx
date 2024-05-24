@@ -20,7 +20,13 @@ function App() {
     }
   };
 
-  return <div></div>;
+  return (
+    <div>
+      <h1>Blockchain Explorer</h1>
+      <AddTransaction onAddTransaction={handleAddTransaction} />
+      {message && <p>{message}</p>}
+    </div>
+  );
 }
 
 export default App;
