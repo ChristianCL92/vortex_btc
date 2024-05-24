@@ -4,7 +4,8 @@
   "description": "Vortex-project",
   "main": "server.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.mjs"
   },
   "author": "",
   "license": "ISC",
