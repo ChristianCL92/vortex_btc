@@ -2,17 +2,17 @@ import { useState } from 'react';
 import '../App.css';
 
 const AddTransaction = ({ onAddTransaction }) => {
-  const [amount, setAmount] = useState('');
   const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
+  const [amount, setAmount] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const transaction = { amount, sender, recipient };
+    const transaction = { sender, recipient, amount };
     onAddTransaction(transaction);
-    setAmount('');
     setSender('');
     setRecipient('');
+    setAmount('');
   };
 
   return (

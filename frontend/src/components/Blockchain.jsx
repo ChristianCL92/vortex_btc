@@ -5,14 +5,19 @@ const Blockchain = ({ blockchain }) => {
     <div>
       <h2>Blockchain</h2>
       {blockchain.map((block, index) => (
-        <div key={index}>
-          <h3>Block {block.blockIndex}</h3>
-          <p>Timestamp: {new Date(block.timestamp).toLocaleString()}</p>
-          <p>Previous Hash: {block.previousBlockHash}</p>
-          <p>Hash: {block.currentBlockHash}</p>
+        <div
+          key={index}
+          className="block-container"
+        >
+          <h3>Block {block.index}</h3>
+          <p>
+            Timestamp:{' '}
+            {block.timestamp && new Date(block.timestamp).toLocaleString()}
+          </p>
+          <p>Previous Hash: {block.previousHash}</p>
+          <p>Hash: {block.hash}</p>
           <p>Nonce: {block.nonce}</p>
-          <p>Difficulty: {block.difficulty}</p>
-          <p>Data: {JSON.stringify(block.data)}</p>
+          <p>Transactions: {JSON.stringify(block.transactions)}</p>
         </div>
       ))}
     </div>
