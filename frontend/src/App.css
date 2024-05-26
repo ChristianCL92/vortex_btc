@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -64,4 +68,32 @@
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.block-container h3 {
+  margin: 0 0 10px 0;
+  background-color: #272727;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.block-container p {
+  margin: 5px 0;
+  background-color: #353535;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.label {
+  color: #ff6347;
+  font-weight: bold;
+}
+
+.message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  color: #ff6347;
+  background-color: #353535;
+  text-align: center;
 }

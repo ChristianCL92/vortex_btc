@@ -23,31 +23,30 @@ function App() {
     }
   };
 
-  const handleAddTransaction = async (transaction) => {
+  const handleAddTransaction = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:5001/api/v1/transactions/',
-        transaction
-      );
-      if (response.data && response.data.message) {
-        setMessage(response.data.message);
-      } else {
-        console.error('Unexpected response format:', response.data);
-        setMessage('Unexpected response from server');
-      }
-      fetchBlockchain();
+      await fetchBlockchain();
+      setMessage('Transaction added and blockchain updated');
+
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
     } catch (error) {
-      console.error('Error adding transaction', error);
-      setMessage('Error adding transaction');
+      console.error('Error updating blockchain', error);
+      setMessage('Error updating blockchain');
+
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
     }
   };
 
   return (
     <div>
-      <h1>Blockchain Explorer</h1>
+      <h1>VORTEX</h1>
       <AddTransaction onAddTransaction={handleAddTransaction} />
-      {message && <p>{message}</p>}
-      {<Blockchain blockchain={blockchain} />}
+      {message && <p className="message">{message}</p>}
+      <Blockchain blockchain={blockchain} />
     </div>
   );
 }
