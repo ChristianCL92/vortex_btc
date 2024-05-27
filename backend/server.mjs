@@ -3,6 +3,7 @@ import blockchainRouter from "./routes/blockchain-routes.mjs"
 import blockRouter from "./routes/block-routes.mjs"
 
 const app = express();
+app.use(express.json());
 
 app.use("/api/v1/blockchain", blockchainRouter)
 app.use("/api/v1/block", blockRouter)
