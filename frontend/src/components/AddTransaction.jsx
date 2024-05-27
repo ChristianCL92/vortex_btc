@@ -1,45 +1,71 @@
 import { useState } from 'react';
-import '../App.css';
+import axios from 'axios';
 
 const AddTransaction = ({ onAddTransaction }) => {
-  const [amount, setAmount] = useState('');
   const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
+  const [amount, setAmount] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleAddTransaction = async (e) => {
     e.preventDefault();
-    const transaction = { amount, sender, recipient };
-    onAddTransaction(transaction);
-    setAmount('');
-    setSender('');
-    setRecipient('');
+    const transaction = { sender, recipient, amount };
+
+    try {
+      await axios.post(
+        'http://localhost:5001/api/v1/transactions/',
+        transaction
+      );
+
+      await axios.post('http://localhost:5001/api/v1/blockchain/block', {
+        transactions: [transaction],
+      });
+
+      await axios.get('http://localhost:5001/api/v1/blockchain/validate');
+
+      onAddTransaction();
+
+      setSender('');
+      setRecipient('');
+      setAmount('');
+    } catch (error) {
+      console.error('Error adding transaction', error);
+    }
   };
 
   return (
     <div>
       <h2>Add Transaction</h2>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleAddTransaction}
         className="form-container"
       >
-        <input
-          type="text"
-          placeholder="Sender"
-          value={sender}
-          onChange={(e) => setSender(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Recipient"
-          value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Sender"
+            value={sender}
+            onChange={(e) => setSender(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Recipient"
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
         <button type="submit">Add Transaction</button>
       </form>
     </div>
