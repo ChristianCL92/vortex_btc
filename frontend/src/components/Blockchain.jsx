@@ -5,7 +5,10 @@ const Blockchain = ({ blockchain }) => {
     <div>
       <h2>Blockchain</h2>
       {blockchain.map((block, index) => (
-        <div key={index}>
+        <div
+          key={index}
+          className="block-container"
+        >
           <h3>
             <span className="label">Block</span> {block.index}
           </h3>
