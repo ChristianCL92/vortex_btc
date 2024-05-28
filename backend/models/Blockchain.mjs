@@ -1,15 +1,16 @@
-import { generateHash } from "../utils/crypto-lib.mjs";
+import { generateHash } from "../utilities/crypto-lib.mjs";
 import Block from "./Block.mjs";
+import Transaction from "./Transaction.mjs";
 
 export default class Blockchain {
   constructor() {
-    this.chain = [Block.genesis];
+    this.chain = [Block.genesisBlock];
     this.pendingTransactions = [];
   }
 
   // Instance method...
   addBlock() {
-    const newBlock = Block.mineBlock({
+    const newBlock = Block.createBlock({
       lastBlock: this.chain.at(-1),
       /*  data: data, */
       data: this.pendingTransactions,
@@ -20,18 +21,27 @@ export default class Blockchain {
     return newBlock;
   }
 
-  getLastBlock() {
-    return this.chain.at(-1);
-  }
-
   addTransaction(amount, sender, recipient) {
     const transaction = new Transaction(amount, sender, recipient);
     this.pendingTransactions.push(transaction);
-    return this.chain.at(-1).index + 1;
+    return transaction
+  }
+
+  /* 
+  getLastBlock() {
+    return this.chain.at(-1);
+  } */
+
+  substituteChain(chain) {
+    if (chain.length <= this.chain.length) return;
+
+    if (!Blockchain.validateChain(chain)) return;
+
+    this.chain = chain;
   }
 
   static validateChain(chain) {
-    if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis))
+    if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesisBlock))
       return false;
 
     for (let i = 1; i < chain.length; i++) {
