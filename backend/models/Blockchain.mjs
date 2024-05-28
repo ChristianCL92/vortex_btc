@@ -1,70 +1,59 @@
 import { generateHash } from "../utils/crypto-lib.mjs";
+import Block from "./Block.mjs";
 
 export default class Blockchain {
   constructor() {
-    this.chain = [];
-    this.memberNodes = [];
-    this.nodeUrl = process.argv[3];
+    this.chain = [Block.genesis];
+    this.pendingTransactions = [];
+  }
 
-    this.createBlock(Date.now(), "0", "0", [], 2048, process.env.DIFFICULTY);
+  // Instance method...
+  addBlock() {
+    const newBlock = Block.mineBlock({
+      lastBlock: this.chain.at(-1),
+      /*  data: data, */
+      data: this.pendingTransactions,
+    });
+
+    this.pendingTransactions = [];
+    this.chain.push(newBlock);
+    return newBlock;
   }
 
   getLastBlock() {
     return this.chain.at(-1);
   }
 
-  hashBlock(timestamp, previousBlockHash, currentBlockData, nonce, difficulty) {
-    const stringToHash =
-      timestamp.toString() +
-      previousBlockHash +
-      JSON.stringify(currentBlockData) +
-      nonce +
-      difficulty;
-    const hash = generateHash(stringToHash);
-
-    return hash;
+  addTransaction(amount, sender, recipient) {
+    const transaction = new Transaction(amount, sender, recipient);
+    this.pendingTransactions.push(transaction);
+    return this.chain.at(-1).index + 1;
   }
 
-  validateChain(blockchain) {
-    let isValid = true;
+  static validateChain(chain) {
+    if (JSON.stringify(chain.at(0)) !== JSON.stringify(Block.genesis))
+      return false;
 
-    for (let i = 1; i < blockchain.length; i++) {
-      const block = blockchain[i];
-      const previousBlock = blockchain[i - 1];
+    for (let i = 1; i < chain.length; i++) {
+      const { timestamp, lastHash, hash, data, nonce, difficulty } =
+        chain.at(i);
+      const currentLastHash = chain[i - 1].hash;
+      const lastDifficulty = chain[i - 1].difficulty;
 
-      const hash = this.hashBlock(
-        block.timestamp,
-        previousBlock.currentBlockHash,
-        block.data
-      );
+      if (lastHash !== currentLastHash) return false;
 
-      if (hash !== block.currentBlockHash) isValid = false;
-      if (block.previousBlockHash !== previousBlock.currentBlockHash)
-        isValid = false;
-    }
+      if (Math.abs(lastDifficulty - difficulty) > 1) return false;
 
-    return isValid;
-  }
-
-  proofOfWork(previousBlockHash, data) {
-    const lastBlock = this.getLastBlock();
-    let difficulty, hash, timestamp;
-    let nonce = 0;
-
-    do {
-      nonce++;
-      timestamp = Date.now();
-
-      difficulty = this.difficultyAdjustment(lastBlock, timestamp);
-      hash = this.hashBlock(
+      const correctHash = generateHash(
         timestamp,
-        previousBlockHash,
+        lastHash,
         data,
         nonce,
         difficulty
       );
-    } while (hash.substring(0, difficulty) !== "0".repeat(difficulty));
+      if (hash !== correctHash) return false;
+    }
 
-    return { nonce, difficulty, timestamp };
+    return true;
   }
 }
