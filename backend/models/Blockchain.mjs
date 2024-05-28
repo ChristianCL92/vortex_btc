@@ -31,7 +31,7 @@ export default class Blockchain {
   }
 
   static validateChain(chain) {
-    if (JSON.stringify(chain.at(0)) !== JSON.stringify(Block.genesis))
+    if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis))
       return false;
 
     for (let i = 1; i < chain.length; i++) {
