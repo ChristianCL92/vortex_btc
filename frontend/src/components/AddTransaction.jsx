@@ -28,7 +28,7 @@ const AddTransaction = ({ onAddTransaction }) => {
 
       await axios.get('http://localhost:5001/api/v1/blockchain/validate');
 
-      onAddTransaction();
+      onAddTransaction(); // Anropa funktionen för att uppdatera blockchain-tillståndet i App.jsx
 
       setSender('');
       setRecipient('');
