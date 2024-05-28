@@ -1,14 +1,14 @@
 import { blockchain } from "../server.mjs";
 import { pubnubServer } from "../server.mjs";
 
-export const createTransaction = (req, res) => {
+export const createTransaction = (req, res, next) => {
   const transactionData = req.body;
 
-  const blockIndex = blockchain.addTransaction(
+   const transactionDetails = blockchain.addTransaction(
     transactionData.amount,
     transactionData.sender,
     transactionData.recipient
-  );
+  ); 
 
   pubnubServer.broadcast();
 
@@ -17,6 +17,6 @@ export const createTransaction = (req, res) => {
     .json({
       success: true,
       statusCode: 201,
-      data: { message: 'transaktionen skapad', transactionData, blockIndex },
+      data: { message: 'transaktionen skapad', transactionDetails },
     });
 };

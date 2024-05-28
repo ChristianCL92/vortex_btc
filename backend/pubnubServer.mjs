@@ -32,7 +32,7 @@ export default class PubNubServer {
         );
 
         if (channel === CHANNELS.BLOCKCHAIN) {
-          this.blockchain.replaceChain(msg);
+          this.blockchain.substituteChain(msg);
         }
       },
     };
