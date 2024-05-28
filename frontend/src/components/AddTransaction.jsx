@@ -17,12 +17,9 @@ const AddTransaction = ({ onAddTransaction }) => {
     };
 
     try {
-      const response = await axios.post(
-        'http://localhost:5001/api/v1/blockchain/block',
-        {
-          transactions: [transaction],
-        }
-      );
+      await axios.post('http://localhost:5001/api/v1/blockchain/block', {
+        transactions: [transaction],
+      });
 
       const updatedBlockchain = await axios.get(
         'http://localhost:5001/api/v1/blockchain/'

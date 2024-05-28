@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div>
-      <h1>VORTEX</h1>
+      <h1>VORTEX (VTX) Coin</h1>
       <AddTransaction onAddTransaction={handleAddTransaction} />
       {message && <p className="message">{message}</p>}
       <Blockchain blockchain={blockchain} />
