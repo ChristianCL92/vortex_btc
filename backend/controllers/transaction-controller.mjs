@@ -3,14 +3,14 @@ import Blockchain from '../models/Blockchain.mjs';
 
 const blockchain = new Blockchain();
 
-const addTransaction = (req, res) => {
-  const { sender, recipient, amount } = req.body;
-  const newTransaction = new Transaction(sender, recipient, amount);
-  blockchain.addTransaction(newTransaction);
+const addTransaction = (req, res, next) => {
+  const transaction = req.body;
+
+  const blockIndex = blockchain.addTransaction(transaction);
   res.json({
     success: true,
     message: 'Transaction added to memory pool',
-    transaction: newTransaction,
+    transaction: blockIndex,
   });
 };
 

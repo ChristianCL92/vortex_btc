@@ -1,34 +1,19 @@
-import { createHash } from '../utilities/crypto-lib.mjs';
-
-class Block {
-  constructor(index, timestamp, transactions, previousHash = '') {
-    this.index = index;
+export default class Block {
+  constructor(
+    timestamp,
+    blockIndex,
+    previousBlockHash,
+    currentBlockHash,
+    data,
+    nonce,
+    difficulty
+  ) {
     this.timestamp = timestamp;
-    this.transactions = transactions;
-    this.previousHash = previousHash;
-    this.hash = '';
-    this.nonce = 0;
-  }
-
-  calculateHash() {
-    return createHash(
-      this.index +
-        this.previousHash +
-        this.timestamp +
-        JSON.stringify(this.transactions) +
-        this.nonce
-    );
-  }
-
-  mineBlock(difficulty) {
-    while (
-      this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')
-    ) {
-      this.nonce++;
-      this.hash = this.calculateHash();
-    }
-    console.log('Block mined: ' + this.hash);
+    this.blockIndex = blockIndex;
+    this.previousBlockHash = previousBlockHash;
+    this.currentBlockHash = currentBlockHash;
+    this.data = data;
+    this.nonce = nonce;
+    this.difficulty = difficulty;
   }
 }
-
-export default Block;
