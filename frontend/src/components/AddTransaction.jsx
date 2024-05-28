@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const AddTransaction = ({ onAddTransaction }) => {
   const [sender, setSender] = useState('');
@@ -8,7 +9,12 @@ const AddTransaction = ({ onAddTransaction }) => {
 
   const handleAddTransaction = async (e) => {
     e.preventDefault();
-    const transaction = { sender, recipient, amount };
+    const transaction = {
+      sender,
+      recipient,
+      amount,
+      transactionId: uuidv4().replaceAll('-', ''),
+    };
 
     try {
       await axios.post(

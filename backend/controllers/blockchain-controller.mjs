@@ -8,17 +8,21 @@ const getBlockchain = (req, res) => {
 };
 
 const addBlock = (req, res) => {
-  const newBlockData = req.body;
+  const { transactions } = req.body;
   const newBlock = new Block(
-    blockchain.chain.length,
+    blockchain.getLatestBlock().index + 1,
     Date.now(),
-    newBlockData.transactions,
-    blockchain.chain[blockchain.chain.length - 1].hash
+    transactions,
+    blockchain.getLatestBlock().hash
   );
-  blockchain.addBlock(newBlock);
-  console.log('New block:', newBlock);
 
-  res.json({ success: true, message: 'New block added to blockchain' });
+  blockchain.addBlock(newBlock);
+
+  res.json({
+    success: true,
+    message: 'New block added to blockchain',
+    block: newBlock,
+  });
 };
 
 const validateBlockchain = (req, res) => {

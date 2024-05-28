@@ -48,6 +48,7 @@ body {
 .form-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -87,6 +88,10 @@ body {
 .label {
   color: #ff6347;
   font-weight: bold;
+}
+
+li {
+  list-style-type: none;
 }
 
 .message {

@@ -26,8 +26,16 @@ const Blockchain = ({ blockchain }) => {
             <span className="label">Nonce:</span> {block.nonce}
           </p>
           <p>
-            <span className="label">Transactions:</span>{' '}
-            {JSON.stringify(block.transactions)}
+            <span className="label">Transactions:</span>
+            {block.transactions && block.transactions.length > 0 ? (
+              block.transactions.map((tx, txIndex) => (
+                <span key={txIndex}>
+                  {` ID: ${tx.transactionId}, Sender: ${tx.sender}, Recipient: ${tx.recipient}, Amount: ${tx.amount}`}
+                </span>
+              ))
+            ) : (
+              <span> No transactions</span>
+            )}
           </p>
         </div>
       ))}
