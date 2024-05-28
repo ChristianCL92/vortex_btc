@@ -17,18 +17,17 @@ const AddTransaction = ({ onAddTransaction }) => {
     };
 
     try {
-      await axios.post(
-        'http://localhost:5001/api/v1/transactions/',
-        transaction
+      const response = await axios.post(
+        'http://localhost:5001/api/v1/blockchain/block',
+        {
+          transactions: [transaction],
+        }
       );
 
-      await axios.post('http://localhost:5001/api/v1/blockchain/block', {
-        transactions: [transaction],
-      });
-
-      await axios.get('http://localhost:5001/api/v1/blockchain/validate');
-
-      onAddTransaction(); // Anropa funktionen för att uppdatera blockchain-tillståndet i App.jsx
+      const updatedBlockchain = await axios.get(
+        'http://localhost:5001/api/v1/blockchain/'
+      );
+      onAddTransaction(updatedBlockchain.data.data.chain);
 
       setSender('');
       setRecipient('');

@@ -25,7 +25,7 @@ export default class Blockchain {
   ) {
     const block = new Block(
       timestamp,
-      this.chain.length + 1,
+      this.chain.length,
       previousBlockHash,
       currentBlockHash,
       data,

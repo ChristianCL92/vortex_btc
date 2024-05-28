@@ -8,6 +8,10 @@ function App() {
   const [blockchain, setBlockchain] = useState([]);
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    fetchBlockchain();
+  }, []);
+
   const fetchBlockchain = async () => {
     try {
       const response = await axios.get(
@@ -19,33 +23,13 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetchBlockchain();
-  }, []);
+  const handleAddTransaction = (newBlockchain) => {
+    setBlockchain(newBlockchain);
+    setMessage('Transaction added and blockchain updated');
 
-  const handleAddTransaction = async () => {
-    try {
-      await axios.post('http://localhost:5001/api/v1/blockchain/block', {
-        transactions: [transaction],
-      });
-
-      await axios.get('http://localhost:5001/api/v1/blockchain/validate');
-
-      await fetchBlockchain();
-
-      setMessage('Transaction added and blockchain updated');
-
-      setTimeout(() => {
-        setMessage('');
-      }, 3000);
-    } catch (error) {
-      console.error('Error updating blockchain', error);
-      setMessage('Error updating blockchain');
-
-      setTimeout(() => {
-        setMessage('');
-      }, 3000);
-    }
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
   };
 
   return (
