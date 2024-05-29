@@ -12,15 +12,15 @@ const AddTransaction = ({ onAddTransaction }) => {
 
     try {
       await axios.post(
-        'http://localhost:5001/api/v1/transactions/',
+        'http://localhost:4001/api/v1/transactions/transaction',
         transaction
       );
 
-      await axios.post('http://localhost:5001/api/v1/blockchain/block', {
+      await axios.get('http://localhost:4001/api/v1/block/mine', {
         transactions: [transaction],
       });
 
-      await axios.get('http://localhost:5001/api/v1/blockchain/validate');
+      /* await axios.get('http://localhost:5001/api/v1/blockchain/validate'); */
 
       onAddTransaction();
 

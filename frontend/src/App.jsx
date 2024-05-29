@@ -15,7 +15,7 @@ function App() {
   const fetchBlockchain = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5001/api/v1/blockchain/'
+        'http://localhost:4001/api/v1/blockchain'
       );
       setBlockchain(response.data.data.chain);
     } catch (error) {

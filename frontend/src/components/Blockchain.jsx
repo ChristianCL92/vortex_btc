@@ -17,7 +17,7 @@ const Blockchain = ({ blockchain }) => {
             {block.timestamp && new Date(block.timestamp).toLocaleString()}
           </p>
           <p>
-            <span className="label">Previous Hash:</span> {block.previousHash}
+            <span className="label">Previous Hash:</span> {block.lastHash}
           </p>
           <p>
             <span className="label">Hash:</span> {block.hash}
@@ -27,7 +27,9 @@ const Blockchain = ({ blockchain }) => {
           </p>
           <p>
             <span className="label">Transactions:</span>{' '}
-            {JSON.stringify(block.transactions)}
+            {toString(block.data[0])}
+           {/*  {block.data.at(0).sender + " to " + block.data.at(0).recipient + " amount: " + block.data.at(0).amount} */}
+            
           </p>
         </div>
       ))}
