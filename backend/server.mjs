@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import Blockchain from "./models/Blockchain.mjs"
 import PubNubServer from "./pubnubServer.mjs"
 import blockchainRouter from "./routes/blockchain-routes.mjs"
@@ -7,6 +8,8 @@ import dotenv from "dotenv";
 import transactionRouter from "./routes/transaction-routes.mjs";
 
 dotenv.config({ path: "./config/.env" });
+
+
 
 const credentials = {
   publishKey: process.env.PUBLISH_KEY,
@@ -20,6 +23,7 @@ export const pubnubServer = new PubNubServer({ blockchain : blockchain, credenti
 
 
 const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 
