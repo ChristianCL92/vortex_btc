@@ -16,9 +16,7 @@ const AddTransaction = ({ onAddTransaction }) => {
         transaction
       );
 
-      await axios.get('http://localhost:4001/api/v1/block/mine', {
-        transactions: [transaction],
-      });
+      await axios.get('http://localhost:4001/api/v1/block/mine');
 
       /* await axios.get('http://localhost:5001/api/v1/blockchain/validate'); */
 
@@ -35,10 +33,7 @@ const AddTransaction = ({ onAddTransaction }) => {
   return (
     <div>
       <h2>Add Transaction</h2>
-      <form
-        onSubmit={handleAddTransaction}
-        className="form-container"
-      >
+      <form onSubmit={handleAddTransaction} className="form-container">
         <div>
           <input
             type="text"

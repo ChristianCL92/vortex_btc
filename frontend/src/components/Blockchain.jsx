@@ -5,33 +5,54 @@ const Blockchain = ({ blockchain }) => {
     <div>
       <h2>Blockchain</h2>
       {blockchain.map((block, index) => (
-        <div
-          key={index}
-          className="block-container"
-        >
-          <h3>
-            <span className="label">Block</span> {block.index}
-          </h3>
-          <p>
+        <ul key={index} className="block-container">
+          <li>
+            <h3>
+              <span className="label">Block</span> {block.index}
+            </h3>
+          </li>
+          <li>
             <span className="label">Timestamp:</span>{' '}
             {block.timestamp && new Date(block.timestamp).toLocaleString()}
-          </p>
-          <p>
+          </li>
+          <li>
             <span className="label">Previous Hash:</span> {block.lastHash}
-          </p>
-          <p>
+          </li>
+          <li>
             <span className="label">Hash:</span> {block.hash}
-          </p>
-          <p>
+          </li>
+          <li>
             <span className="label">Nonce:</span> {block.nonce}
-          </p>
-          <p>
-            <span className="label">Transactions:</span>{' '}
-            {toString(block.data[0])}
-           {/*  {block.data.at(0).sender + " to " + block.data.at(0).recipient + " amount: " + block.data.at(0).amount} */}
-            
-          </p>
-        </div>
+          </li>
+          <li>
+            <span className="label">Difficulty:</span> {block.difficulty}
+          </li>
+          <li>
+            <span className="label">Transactions:</span>
+            {block.data &&
+              block.data.map((transaction, index) => {
+                return (
+                  <div key={index} className="transaction">
+                    <ul>
+                      <li>
+                        <b>Transaction nr: </b>
+                        {index + 1}
+                      </li>
+                      <li>
+                        <b>Sender:</b> {transaction.sender}
+                      </li>
+                      <li>
+                        <b>Recipient:</b> {transaction.recipient}
+                      </li>
+                      <li>
+                        <b>Amount:</b> {transaction.amount}
+                      </li>
+                    </ul>
+                  </div>
+                );
+              })}
+          </li>
+        </ul>
       ))}
     </div>
   );

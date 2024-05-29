@@ -7,6 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
+  background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
 }
 
 .logo {
@@ -15,9 +16,11 @@ body {
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -26,6 +29,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -49,45 +53,75 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 20px;
+  background-color: #00000052;
+  border-radius: 5px;
 }
 
-.form-container input {
-  padding: 5px;
-  font-size: 16px;
+h1 {
+  color: #2f7b49;
+}
+
+h2 {
+  text-align: left;
+  color: #0b4b21b5;
+}
+
+.form-container input,
+.form-container button {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 0 10px;
+  border: none;
 }
 
 .form-container button {
-  padding: 5px 10px;
-  font-size: 16px;
   cursor: pointer;
-  
+  background-color: #42ed92;
+  color: #041a0c;
+  font-weight: bold;
 }
 
 .block-container {
   background-color: #3a3a3a;
   border: #535353 solid 1px;
-  padding: 10px;
+  padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .block-container h3 {
-  margin: 0 0 10px 0;
   background-color: #272727;
   border-radius: 5px;
   padding: 10px;
+  margin: 0;
 }
 
-.block-container p {
-  margin: 5px 0;
-  background-color: #353535;
+.block-container>li {
+  list-style: none;
+  background-color: #292929;
   border-radius: 5px;
   padding: 8px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.block-container .transaction ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: left;
 }
 
 .label {
-  color: #ff6347;
+  color: #47ff63;
   font-weight: bold;
 }
 
